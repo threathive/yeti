@@ -68,11 +68,8 @@ class HaveIBeenPwnedSearchBreaches(HaveIBeenPwnedAPI, OneShotAnalytics):
 	for hit in json_result:
 		if hit.get('Name'):
 			tags = [ 'comprimised', hit.get('Name', '').lower() + '_breach' ]
-
 		        observable.tag(tags)
-
                         o_breach = Text.get_or_create( value =  'Account compromised in {} breach on or around {}'.format(hit.get('Name', ''), hit.get('AddedDate', '') ) )
-
                         links.update(
                             observable.active_link_to(o_breach, 'found in breach', 'haveibeenpwned_hit')
                         )
@@ -107,11 +104,8 @@ class HaveIBeenPwnedSearchPastes(HaveIBeenPwnedAPI, OneShotAnalytics):
 	for hit in json_result:
 		if hit.get('Source'):
 			tags = [ 'comprimised', 'found_on_pastebin']
-
 		        observable.tag(tags)
-
                         o_breach = Text.get_or_create( value =  'Account compromised found on pastebin on or around {} paste id {} , paste title {}'.format(hit.get('Date', '') , hit.get('Id', ''), hit.get('Title', '') ) )
-
                         links.update(
                             observable.active_link_to(o_breach, 'found on pastebin', 'haveibeenpwned_hit')
                         )
